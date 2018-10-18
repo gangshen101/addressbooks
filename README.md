@@ -1,4 +1,5 @@
-Introduction
+Introduction:
+
 	An address book application which provides below features:
 	1. Address book will hold name and phone numbers of contact entries
 	2. Users should be able to add new contact entries

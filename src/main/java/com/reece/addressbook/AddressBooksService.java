@@ -31,7 +31,7 @@ public interface AddressBooksService {
     public Collection<Contact> getUniqueContactsInAllAddressBooks();
     
     /**
-    * Get a contact from an address books
+    * Get a contact from an address book
     * @param Long addressBookId, the address book id
     * @param Long contactId, the contact id
     * @return Contact, the contact
@@ -39,7 +39,7 @@ public interface AddressBooksService {
     public Contact getContactInAddressBook(Long addressBookId, Long contactId);
     
     /**
-    * Print all contacts in an address books
+    * Print all contacts in an address book
     * @param Long addressBookId, the address book id
     */
     public void printContactsInAddressBook(Long addressBookId);
@@ -52,7 +52,7 @@ public interface AddressBooksService {
     
     /**
     * Remove a address book
-    * @param AddressBook addressBook, the address book to be removed
+    * @param Long addressBookId, id of the address book to be removed
     */
     public void removeAddressBook(Long addressBookId);
     
