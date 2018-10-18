@@ -69,7 +69,7 @@ public interface AddressBooksService {
     
     /**
     * Get an address book
-    * @Long addressBookId, the address book id
+    * @param Long addressBookId, the address book id
     * @return AddressBook, the specific address books
     */
     public AddressBook getAddressBook(Long addressBookId);
