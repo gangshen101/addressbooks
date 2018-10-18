@@ -2,9 +2,11 @@ package com.reece.addressbook;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class AddressBooksServiceImpl implements AddressBooksService {
+    private static final String CONTACTS_OUTPUT_PREFIX = "Contacts are : ";
     private ConcurrentHashMap<Long, AddressBook> addressBooks;
     
     public AddressBooksServiceImpl(ConcurrentHashMap<Long, AddressBook> addressBooks) {
@@ -14,57 +16,74 @@ public class AddressBooksServiceImpl implements AddressBooksService {
 
     @Override
     public void addContact(Long addressBookId, Contact contact) {
-
+        if (addressBooks.containsKey(addressBookId)) {
+            addressBooks.get(addressBookId).addContact(contact);
+        }
     }
 
     @Override
     public void removeContact(Long addressBookId, Long contactId) {
-
+        if (addressBooks.containsKey(addressBookId)) {
+            addressBooks.get(addressBookId).removeContact(contactId);
+        }
     }
 
     @Override
     public Collection<Contact> getAllContactsInAddressBook(Long addressBookId) {
-        return new HashSet<Contact>();
+        return addressBooks.containsKey(addressBookId) ? addressBooks.get(addressBookId).getAllContacts() : null;
     }
 
     @Override
     public Contact getContactInAddressBook(Long addressBookId, Long contactId) {
-        return null;
+        return addressBooks.containsKey(addressBookId) ? addressBooks.get(addressBookId).getContact(contactId) : null;
     }
 
     @Override
     public void printContactsInAddressBook(Long addressBookId) {
-
+        if (!addressBooks.containsKey(addressBookId)) {
+            return;
+        }
+        System.out.println(CONTACTS_OUTPUT_PREFIX);
+        addressBooks.get(addressBookId).getAllContacts().forEach(contact -> {
+            System.out.println(contact);
+        });
     }
 
     @Override
     public void addAddressBook(AddressBook addressBook) {
-
+        addressBooks.put(addressBook.getId(), addressBook);
     }
 
     @Override
     public void removeAddressBook(Long addressBookId) {
- 
+        addressBooks.remove(addressBookId);       
     }
 
     @Override
     public void printUniqueContactsInAllAddressBooks() {
-
+        System.out.println(CONTACTS_OUTPUT_PREFIX);
+        getUniqueContactsInAllAddressBooks().forEach(contact -> {
+            System.out.println(contact);
+        });
     }
 
     @Override
     public Collection<AddressBook> getAllAddressBooks() {
-        return null;
+        return addressBooks.values();
     }
 
     @Override
     public AddressBook getAddressBook(Long addressBookId) {
-        return null;
+        return addressBooks.get(addressBookId);
     }
 
     @Override
     public Collection<Contact> getUniqueContactsInAllAddressBooks() {
-    	return new HashSet<Contact>();
+        Set<Contact> uniqueContacts = new HashSet<Contact>();
+        addressBooks.values().forEach(addressBook -> {
+            uniqueContacts.addAll(addressBook.getAllContacts());
+        });
+        return uniqueContacts;
     }
 
 }
