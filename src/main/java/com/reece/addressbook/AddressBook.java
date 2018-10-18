@@ -1,16 +1,18 @@
 package com.reece.addressbook;
 
 import java.util.Collection;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
+
+import com.reece.addressbook.Contact;
 
 public class AddressBook {
     private static final AtomicLong count = new AtomicLong(0);
     private final Long id;
     private final String name;
-    private ConcurrentHashMap<Long, Contact> contacts;
+    private Map<Long, Contact> contacts;
     
-    public AddressBook(String name, ConcurrentHashMap<Long, Contact> contacts) {
+    public AddressBook(String name, Map<Long, Contact> contacts) {
         super();
         this.name = name;
         this.contacts = contacts;

@@ -3,13 +3,13 @@ package com.reece.addressbook;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Map;
 
 public class AddressBooksServiceImpl implements AddressBooksService {
     private static final String CONTACTS_OUTPUT_PREFIX = "Contacts are : ";
-    private ConcurrentHashMap<Long, AddressBook> addressBooks;
+    private Map<Long, AddressBook> addressBooks;
     
-    public AddressBooksServiceImpl(ConcurrentHashMap<Long, AddressBook> addressBooks) {
+    public AddressBooksServiceImpl(Map<Long, AddressBook> addressBooks) {
         super();
         this.addressBooks = addressBooks;
     }

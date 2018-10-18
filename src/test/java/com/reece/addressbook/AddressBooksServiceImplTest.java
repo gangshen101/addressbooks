@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Collection;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.HashMap;
 
 import org.junit.After;
 import org.junit.Before;
@@ -26,19 +26,19 @@ public class AddressBooksServiceImplTest {
     private AddressBooksServiceImpl addressBooksService;
     
     private void initializeContacts() {
-        gary= new Contact(GARY, new ConcurrentHashMap<Long, PhoneNumber>());
+        gary= new Contact(GARY, new HashMap<Long, PhoneNumber>());
         gary.addPhoneNumber(new PhoneNumber(PhoneNumberType.MOBILE, "0432981899"));
-        eric= new Contact(ERIC, new ConcurrentHashMap<Long, PhoneNumber>());
+        eric= new Contact(ERIC, new HashMap<Long, PhoneNumber>());
         eric.addPhoneNumber(new PhoneNumber(PhoneNumberType.OFFICE, "0380900166"));
     }
     
     private void initializeAddressBooks() {
-        melbourneAddressBook = new AddressBook(MELBOURNE, new ConcurrentHashMap<Long, Contact>());
-        sydneyAddressBook = new AddressBook(SYDNEY, new ConcurrentHashMap<Long, Contact>());
+        melbourneAddressBook = new AddressBook(MELBOURNE, new HashMap<Long, Contact>());
+        sydneyAddressBook = new AddressBook(SYDNEY, new HashMap<Long, Contact>());
     }
     
     private void initializeAddressBooksService() {
-        addressBooksService = new AddressBooksServiceImpl(new ConcurrentHashMap<Long, AddressBook>());
+        addressBooksService = new AddressBooksServiceImpl(new HashMap<Long, AddressBook>());
         addressBooksService.addAddressBook(melbourneAddressBook);
         addressBooksService.addAddressBook(sydneyAddressBook);
     }
@@ -98,7 +98,7 @@ public class AddressBooksServiceImplTest {
     
     @Test
     public void testAddAddressBook() {
-        AddressBook brisbaneAddressBook = new AddressBook("Brisbane", new ConcurrentHashMap<Long, Contact>());
+        AddressBook brisbaneAddressBook = new AddressBook("Brisbane", new HashMap<Long, Contact>());
         addressBooksService.addAddressBook(brisbaneAddressBook);
         assertEquals(addressBooksService.getAddressBook(brisbaneAddressBook.getId()).getName(), "Brisbane");
     }
